@@ -39,6 +39,7 @@ exports.handler = async function(event, context) {
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({
         access_key: accessKey,
+        to: 'tintorialavanderiaglemsec@gmail.com',
         subject: 'Nuova richiesta dal sito Glem Sec',
         from_name: nome,
         nome,
