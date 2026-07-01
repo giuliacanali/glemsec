@@ -1801,7 +1801,7 @@
     });
   }
 
-  fetch('/api/google-rating')
+  fetch('/.netlify/functions/google-rating')
     .then(r => r.json())
     .then(data => {
       if (data.error) return;
@@ -1848,7 +1848,7 @@
     submitBtn.disabled = true;
     submitBtn.textContent = 'Invio in corso...';
 
-    fetch('/api/contact', {
+    fetch('/.netlify/functions/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nome, email, telefono, azienda, tipo, messaggio })
