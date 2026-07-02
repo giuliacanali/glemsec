@@ -66,7 +66,7 @@ exports.handler = async function(event, context) {
   } catch (err) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Errore nella chiamata a Web3Forms.' })
+      body: JSON.stringify({ error: err.message || 'Errore nella chiamata a Web3Forms.' })
     };
   }
 };
