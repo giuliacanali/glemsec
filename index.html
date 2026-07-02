@@ -1600,7 +1600,7 @@
     </div>
 
     <div class="contact-grid reveal">
-      <form class="form-card" id="contactForm" name="contatto" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <form class="form-card" id="contactForm" name="contatto" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/grazie.html">
         <input type="hidden" name="form-name" value="contatto">
         <p style="display:none;"><label>Non compilare: <input name="bot-field"></label></p>
 
@@ -1648,7 +1648,7 @@
           <label for="privacy">Ho letto e accetto la <a href="privacy.html" target="_blank" style="color:var(--gold); text-decoration:underline;">privacy policy</a></label>
         </div>
 
-        <button type="button" class="btn btn-gold" id="submitForm" onclick="submitContactForm()">Richiedi preventivo</button>
+        <button type="submit" class="btn btn-gold" id="submitForm">Richiedi preventivo</button>
         <p class="form-note">✓ Ti contatteremo entro 24 ore</p>
       </form>
 
