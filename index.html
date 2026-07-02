@@ -1600,7 +1600,7 @@
     </div>
 
     <div class="contact-grid reveal">
-      <form class="form-card" id="contactForm" name="contatto" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/grazie.html">
+      <form class="form-card" id="contactForm" name="contatto" method="POST" data-netlify="true" netlify-honeypot="bot-field">
         <input type="hidden" name="form-name" value="contatto">
         <p style="display:none;"><label>Non compilare: <input name="bot-field"></label></p>
 
@@ -1648,7 +1648,7 @@
           <label for="privacy">Ho letto e accetto la <a href="privacy.html" target="_blank" style="color:var(--gold); text-decoration:underline;">privacy policy</a></label>
         </div>
 
-        <button type="submit" class="btn btn-gold" id="submitForm">Richiedi preventivo</button>
+        <button type="button" class="btn btn-gold" id="submitForm" onclick="submitContactForm()">Richiedi preventivo</button>
         <p class="form-note">✓ Ti contatteremo entro 24 ore</p>
       </form>
 
@@ -1851,22 +1851,24 @@
     submitBtn.disabled = true;
     submitBtn.textContent = 'Invio in corso...';
 
-    fetch('/.netlify/functions/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nome, email, telefono, azienda, tipo, messaggio })
-    })
-      .then(r => r.text())
-      .then(text => {
-        let data;
-        try { data = JSON.parse(text); } catch(e) { throw new Error('Risposta non valida: ' + text.slice(0, 100)); }
-        if (data.error) throw new Error(data.error);
+    const data = new FormData();
+    data.append('form-name', 'contatto');
+    data.append('nome', nome);
+    data.append('email', email);
+    data.append('telefono', telefono);
+    data.append('azienda', azienda);
+    data.append('tipo', tipo);
+    data.append('messaggio', messaggio);
+
+    fetch('/', { method: 'POST', body: data })
+      .then(r => {
+        if (!r.ok) throw new Error('Errore ' + r.status);
         form.reset();
         document.getElementById('privacy').checked = false;
         alert('Grazie! Abbiamo ricevuto la tua richiesta. Ti contatteremo entro 24 ore.');
       })
-      .catch((err) => {
-        alert('Errore: ' + (err.message || 'invio fallito'));
+      .catch(() => {
+        alert('Si è verificato un errore nell\'invio. Riprova oppure scrivici su WhatsApp o per telefono.');
       })
       .finally(() => {
         submitBtn.disabled = false;
