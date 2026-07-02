@@ -1860,8 +1860,8 @@
         document.getElementById('privacy').checked = false;
         alert('Grazie! Abbiamo ricevuto la tua richiesta. Ti contatteremo entro 24 ore.');
       })
-      .catch(() => {
-        alert('Si è verificato un errore nell\'invio. Riprova oppure scrivici su WhatsApp o per telefono.');
+      .catch((err) => {
+        alert('Errore: ' + (err.message || 'invio fallito'));
       })
       .finally(() => {
         submitBtn.disabled = false;
