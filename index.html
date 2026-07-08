@@ -1849,14 +1849,24 @@
     submitBtn.disabled = true;
     submitBtn.textContent = 'Invio in corso...';
 
-    fetch('/api/contact', {
+    fetch('https://api.web3forms.com/submit', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nome, email, telefono, azienda, tipo, messaggio })
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        access_key: '636b57a0-a2f1-4566-a7d5-b44e71330f0f',
+        subject: 'Nuova richiesta dal sito Glem Sec',
+        from_name: nome,
+        nome,
+        email,
+        telefono,
+        azienda,
+        tipo,
+        messaggio
+      })
     })
       .then(r => r.json())
       .then(data => {
-        if (data.error) throw new Error(data.error);
+        if (!data.success) throw new Error(data.message || 'Invio non riuscito.');
         form.reset();
         document.getElementById('privacy').checked = false;
         alert('Grazie! Abbiamo ricevuto la tua richiesta. Ti contatteremo entro 24 ore.');
