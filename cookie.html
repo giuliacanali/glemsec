@@ -3,6 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-W15H136MFL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', { 'analytics_storage': 'denied' });
+  gtag('js', new Date());
+
+  gtag('config', 'G-W15H136MFL');
+</script>
+
 <title>Cookie Policy | Glem Sec — Tintoria e Lavanderia Roma</title>
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -62,6 +74,46 @@
     font-size:13px;
   }
   footer a{ color:var(--gold); }
+
+  .cookie-banner{
+    position:fixed;
+    left:0; right:0; bottom:0;
+    z-index:2000;
+    background:var(--navy);
+    border-top:1px solid rgba(226,178,83,.3);
+    padding:16px 20px;
+    display:none;
+  }
+  .cookie-banner.show{ display:block; }
+  .cookie-banner-inner{
+    max-width:1100px;
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    flex-wrap:wrap;
+  }
+  .cookie-banner p{ margin:0; font-size:13px; color:#d4dde8; flex:1; min-width:220px; line-height:1.5; }
+  .cookie-banner a{ color:var(--gold); text-decoration:underline; }
+  .cookie-banner-actions{ display:flex; gap:10px; flex-shrink:0; }
+  .cookie-banner button{
+    font-family:inherit;
+    cursor:pointer;
+    border-radius:999px;
+    padding:10px 20px;
+    font-size:12.5px;
+    font-weight:700;
+    border:1.5px solid transparent;
+    white-space:nowrap;
+  }
+  .cookie-banner-accept{ background:var(--gold); color:var(--navy); }
+  .cookie-banner-reject{ background:transparent; color:var(--cream); border-color:rgba(226,178,83,.4); }
+  @media (max-width:620px){
+    .cookie-banner-inner{ flex-direction:column; align-items:stretch; }
+    .cookie-banner-actions{ justify-content:stretch; }
+    .cookie-banner button{ flex:1; }
+  }
 </style>
 </head>
 <body>
@@ -75,21 +127,26 @@
 <main>
   <div class="wrap">
     <h1>Cookie Policy</h1>
-    <p class="updated">Ultimo aggiornamento: 26 giugno 2026</p>
+    <p class="updated">Ultimo aggiornamento: 4 agosto 2026</p>
 
-    <p>Questa pagina descrive i cookie e le tecnologie simili utilizzate dal sito <strong>glemsec.it</strong>, di titolarità di GL. EM. SEC DI BARTOLOZZI CONSUELO.</p>
+    <p>Questa pagina descrive i cookie e le tecnologie simili utilizzate dal sito <strong>tintorialavanderiaglemsec.com</strong>, di titolarità di GL. EM. SEC DI BARTOLOZZI CONSUELO.</p>
 
     <h2>1. Cosa sono i cookie</h2>
     <p>I cookie sono piccoli file di testo che i siti visitati inviano al dispositivo dell'utente, dove vengono memorizzati per essere poi ritrasmessi agli stessi siti alla visita successiva.</p>
 
     <h2>2. Cookie utilizzati da questo sito</h2>
-    <p>Il sito <strong>non utilizza cookie di profilazione o di marketing</strong>. Vengono utilizzati esclusivamente cookie tecnici necessari al funzionamento del sito e, indirettamente, cookie impostati da servizi di terze parti integrati nelle pagine.</p>
+    <p>Il sito <strong>non utilizza cookie di profilazione o di marketing</strong>. Vengono utilizzati cookie tecnici necessari al funzionamento del sito, cookie di analisi statistica (attivati solo previo consenso tramite il banner) e, indirettamente, cookie impostati da servizi di terze parti integrati nelle pagine.</p>
 
     <table>
       <tr>
         <th>Servizio</th>
         <th>Finalità</th>
         <th>Tipo</th>
+      </tr>
+      <tr>
+        <td>Google Analytics (GA4)</td>
+        <td>Statistiche anonime e aggregate sulle visite al sito</td>
+        <td>Cookie di analisi, attivato solo dopo il consenso dal banner</td>
       </tr>
       <tr>
         <td>Google Maps</td>
@@ -138,6 +195,36 @@
     © 2026 GL. EM. SEC DI BARTOLOZZI CONSUELO — <a href="index.html">Torna al sito</a> · <a href="privacy.html">Privacy Policy</a>
   </div>
 </footer>
+
+<div class="cookie-banner" id="cookieBanner">
+  <div class="cookie-banner-inner">
+    <p>Usiamo cookie tecnici necessari al funzionamento del sito e, solo con il tuo consenso, cookie di analisi per capire come viene usato. <a href="cookie.html" target="_blank">Scopri di più</a></p>
+    <div class="cookie-banner-actions">
+      <button type="button" class="cookie-banner-reject" id="cookieReject">Rifiuta</button>
+      <button type="button" class="cookie-banner-accept" id="cookieAccept">Accetta</button>
+    </div>
+  </div>
+</div>
+<script>
+  (function(){
+    var consent = localStorage.getItem('cookieConsent');
+    var banner = document.getElementById('cookieBanner');
+    if (consent === 'granted') {
+      gtag('consent', 'update', { analytics_storage: 'granted' });
+    } else if (consent !== 'denied') {
+      banner.classList.add('show');
+    }
+    document.getElementById('cookieAccept').addEventListener('click', function(){
+      localStorage.setItem('cookieConsent', 'granted');
+      gtag('consent', 'update', { analytics_storage: 'granted' });
+      banner.classList.remove('show');
+    });
+    document.getElementById('cookieReject').addEventListener('click', function(){
+      localStorage.setItem('cookieConsent', 'denied');
+      banner.classList.remove('show');
+    });
+  })();
+</script>
 
 </body>
 </html>
