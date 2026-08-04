@@ -613,6 +613,7 @@
     color:var(--gold);
     font-weight:700;
   }
+  .hero-cta-mobile{ display:none; }
 
   .hero-art{
     position:relative;
@@ -1448,6 +1449,10 @@
     .service-card.open .service-cta{ display:inline-block; margin-top:12px; }
     .biz-card p{ display:none; }
     .biz-card.open p{ display:block; margin-top:12px; }
+
+    .hero-whatsapp-desktop{ display:none; }
+    .hero-cta-mobile{ display:block; }
+    .hero-outline-btn{ border-color:var(--navy) !important; }
   }
   @media (max-width: 620px){
     .wrap{ padding:0 20px; }
@@ -1500,7 +1505,7 @@
   <div class="topbar">
     <div class="wrap topbar-inner">
       <div class="topbar-left">
-        <a href="#contatti">
+        <a href="#come-funziona">
           <svg viewBox="0 0 24 24"><use href="#ic-truck"/></svg>
           Ritiro e consegna gratuiti a Roma
         </a>
@@ -1578,11 +1583,18 @@
       <p class="hero-sub">Lavaggio a secco, smacchiatura e stiro di alta qualità per privati — e un servizio su misura per professionisti, hotel, B&amp;B, lavanderie e altre attività territoriali. Servizio di ritiro e consegna a domicilio.</p>
 
       <div class="hero-ctas">
-        <a href="https://wa.me/393451177166" class="btn btn-whatsapp">
+        <a href="https://wa.me/393451177166" class="btn btn-whatsapp hero-whatsapp-desktop">
           <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.6" style="width:16px; height:16px; flex-shrink:0;"><use href="#ic-chat"/></svg>
           Scrivici su WhatsApp
         </a>
-        <a href="#aziende" class="btn" style="border:2px solid var(--gold); color:var(--navy); background:transparent;" onmouseover="this.style.borderColor='var(--navy)'; this.style.background='var(--cream)';" onmouseout="this.style.borderColor='var(--gold)'; this.style.background='transparent';">Sei un'azienda? Scopri i servizi</a>
+        <div class="cta-dropdown hero-cta-mobile">
+          <button type="button" class="btn btn-gold cta-dropdown-toggle" style="width:100%; display:flex; align-items:center; justify-content:center;" aria-haspopup="true" aria-expanded="false">Richiedi ritiro</button>
+          <div class="cta-dropdown-menu">
+            <a href="tel:+393451177166"><svg viewBox="0 0 24 24"><use href="#ic-phone"/></svg> Chiama</a>
+            <a href="https://wa.me/393451177166" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><use href="#ic-chat"/></svg> WhatsApp</a>
+          </div>
+        </div>
+        <a href="#aziende" class="btn hero-outline-btn" style="border:2px solid var(--gold); color:var(--navy); background:transparent;" onmouseover="this.style.borderColor='var(--navy)'; this.style.background='var(--cream)';" onmouseout="this.style.borderColor='var(--gold)'; this.style.background='transparent';">Sei un'azienda? Scopri i servizi</a>
       </div>
 
     </div>
