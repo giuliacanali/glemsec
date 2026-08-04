@@ -2261,6 +2261,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           discountStatus.className = 'discount-popup-status show success';
           discountDone = true;
           sessionStorage.setItem('discountPopupState', 'done');
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ event: 'discount_signup' });
         })
         .catch((err) => {
           discountStatus.textContent = err.status === 409
@@ -2363,6 +2365,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         form.reset();
         document.getElementById('privacy').checked = false;
         alert('Grazie! Abbiamo ricevuto la tua richiesta. Ti contatteremo entro 24 ore.');
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: 'contact_form_submit' });
       })
       .catch(() => {
         alert('Si è verificato un errore nell\'invio. Riprova oppure scrivici su WhatsApp o per telefono.');
