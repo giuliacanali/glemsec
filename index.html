@@ -832,7 +832,7 @@
     padding-top:46px;
     border-top:1px solid rgba(226,178,83,.2);
   }
-  .biz-cta p{ font-family:var(--font-display); font-size:21px; max-width:480px; color:var(--cream); }
+  .biz-cta p{ font-family:var(--font-display); font-size:21px; max-width:none; white-space:nowrap; color:var(--cream); }
 
   /* ============ COME FUNZIONA ============ */
   .process{
@@ -1295,11 +1295,113 @@
   .float-cta:hover{ background:#1ebe5b; transform:translateY(-3px); }
   .float-cta svg{ width:17px; height:17px; }
 
+  /* ============ DISCOUNT POPUP ============ */
+  .discount-popup{
+    position:fixed;
+    bottom:100px; right:26px;
+    z-index:950;
+    width:300px;
+    max-width:calc(100vw - 40px);
+    background:linear-gradient(170deg, var(--navy) 0%, #081626 100%);
+    border:1px solid rgba(226,178,83,.3);
+    border-radius:18px;
+    padding:24px 22px;
+    box-shadow:0 20px 46px -14px rgba(13,38,57,.55);
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(16px);
+    transition:opacity .4s var(--ease), transform .4s var(--ease), visibility .4s;
+  }
+  .discount-popup.show{ opacity:1; visibility:visible; transform:translateY(0); }
+  .discount-popup-close{
+    position:absolute;
+    top:12px; right:12px;
+    width:28px; height:28px;
+    border-radius:50%;
+    background:rgba(244,242,237,.08);
+    color:#d4dde8;
+    display:flex; align-items:center; justify-content:center;
+    transition:background .2s var(--ease), color .2s var(--ease);
+  }
+  .discount-popup-close:hover{ background:rgba(244,242,237,.16); color:var(--gold); }
+  .discount-popup-close svg{ width:14px; height:14px; }
+  .discount-popup-title{
+    margin-top:14px;
+    font-family:var(--font-display);
+    font-size:17px;
+    font-weight:600;
+    color:var(--cream);
+    line-height:1.35;
+    padding-right:20px;
+  }
+  .discount-popup-note{
+    margin-top:8px;
+    font-size:12.5px;
+    color:#9fb0c0;
+    line-height:1.5;
+  }
+  .discount-popup-fineprint{ margin-top:10px; font-size:11px; }
+  .discount-popup-form{
+    margin-top:14px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .discount-popup-form input{
+    width:100%;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(244,242,237,.22);
+    border-radius:9px;
+    padding:11px 13px;
+    font-size:13.5px;
+    font-family:inherit;
+    color:var(--cream);
+  }
+  .discount-popup-form input::placeholder{ color:#7f92a3; }
+  .discount-popup-form input:focus{ outline:none; border-color:var(--gold); }
+  .discount-popup-form .btn{ padding:11px 18px; font-size:12px; width:100%; }
+  .discount-popup-check{ margin:2px 0 0; font-size:11.5px; }
+  .discount-popup-check label{ font-size:11.5px; }
+  .discount-popup-form .btn:disabled{ opacity:.6; cursor:default; transform:none; }
+  .discount-popup-status{
+    margin-top:12px;
+    font-size:12.5px;
+    line-height:1.5;
+    display:none;
+  }
+  .discount-popup-status.show{ display:block; }
+  .discount-popup-status.success{ color:var(--gold-soft); }
+  .discount-popup-status.error{ color:#e8a6a6; }
+  .discount-mini{
+    position:fixed;
+    bottom:100px; right:26px;
+    z-index:950;
+    display:none;
+    align-items:center;
+    gap:8px;
+    padding:12px 18px;
+    border-radius:999px;
+    background:var(--gold);
+    color:var(--navy);
+    font-size:12.5px;
+    font-weight:700;
+    letter-spacing:.03em;
+    border:none;
+    box-shadow:0 14px 30px -10px rgba(226,178,83,.55);
+    transition:transform .2s var(--ease), box-shadow .2s var(--ease), background .2s var(--ease);
+  }
+  .discount-mini.show{ display:flex; }
+  .discount-mini:hover{ background:var(--gold-soft); transform:translateY(-2px); box-shadow:0 18px 36px -10px rgba(226,178,83,.6); }
+  .discount-mini svg{ width:16px; height:16px; }
+  @media (max-width:620px){
+    .discount-popup{ right:16px; left:16px; bottom:92px; width:auto; max-width:none; }
+    .discount-mini{ right:16px; bottom:92px; }
+  }
+
   /* ============ RESPONSIVE ============ */
   @media (max-width: 980px){
     nav.primary-nav{ display:none; }
-    .nav-cta .btn:not(.btn-gold){ display:none; }
-    body.menu-open .nav-cta{ display:none; }
+    .nav-cta{ display:none; }
     .menu-toggle{ display:flex; }
     .hero-grid{ grid-template-columns:1fr; }
     .hero-art{ order:-1; }
@@ -1315,9 +1417,41 @@
     .footer-grid{ grid-template-columns:1fr 1fr; gap:36px; }
     .footer-cta{ padding:76px 0 64px; }
     .footer-flourish{ width:420px; top:-48px; }
+
+    .service-card, .biz-card{
+      position:relative;
+      cursor:pointer;
+      height:auto;
+      padding:18px 46px 18px 22px;
+    }
+    .service-card-head, .biz-card-head{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+    .service-card-head img, .biz-card-head img{ margin:0; flex-shrink:0; }
+    .service-card-head h4, .biz-card-head h3{ margin:0; }
+    .service-card::after, .biz-card::after{
+      content:"";
+      position:absolute;
+      top:50%; right:22px;
+      width:9px; height:9px;
+      border-right:1.5px solid var(--navy);
+      border-bottom:1.5px solid var(--navy);
+      transform:translateY(-50%) rotate(45deg);
+      transition:transform .25s var(--ease);
+    }
+    .biz-card::after{ border-color:var(--gold); }
+    .service-card.open::after, .biz-card.open::after{ transform:translateY(-50%) rotate(225deg); }
+    .service-card p, .service-card .service-cta{ display:none; }
+    .service-card.open p{ display:block; margin-top:12px; }
+    .service-card.open .service-cta{ display:inline-block; margin-top:12px; }
+    .biz-card p{ display:none; }
+    .biz-card.open p{ display:block; margin-top:12px; }
   }
   @media (max-width: 620px){
     .wrap{ padding:0 20px; }
+    .biz-cta p{ font-size:16px; }
     .service-grid{ grid-template-columns:1fr; }
     .process-grid{ grid-template-columns:1fr; }
     .values-grid{ grid-template-columns:1fr; }
@@ -1535,38 +1669,50 @@
 
     <div class="service-grid reveal">
       <div class="service-card">
-        <img src="icone/capi-delicati-navy.svg" alt="Lavaggio capi delicati seta lana cashmere Roma" width="30" height="30">
-        <h4>Lavaggio capi delicati</h4>
+  <div class="service-card-head">
+          <img src="icone/capi-delicati-navy.svg" alt="Lavaggio capi delicati seta lana cashmere Roma" width="30" height="30">
+          <h4>Lavaggio capi delicati</h4>
+  </div>
         <p>Trattamenti dedicati a seta, lana, cashmere e tessuti pregiati, con prodotti selezionati per preservare fibre e colori.</p>
         <a href="https://wa.me/393451177166" class="service-cta" target="_blank" rel="noopener">Contattaci</a>
       </div>
       <div class="service-card">
-        <img src="icone/smacchiatura-navy.svg" alt="Smacchiatura professionale Roma" width="30" height="30">
-        <h4>Smacchiatura professionale</h4>
+  <div class="service-card-head">
+          <img src="icone/smacchiatura-navy.svg" alt="Smacchiatura professionale Roma" width="30" height="30">
+          <h4>Smacchiatura professionale</h4>
+  </div>
         <p>Analisi e trattamento di ogni tipologia di macchia, per restituire freschezza anche ai capi più compromessi.</p>
         <a href="https://wa.me/393451177166" class="service-cta" target="_blank" rel="noopener">Contattaci</a>
       </div>
       <div class="service-card">
-        <img src="icone/stiro-finitura-navy.svg" alt="Stiro e finitura camicie Roma" width="30" height="30">
-        <h4>Stiro e finitura</h4>
+  <div class="service-card-head">
+          <img src="icone/stiro-finitura-navy.svg" alt="Stiro e finitura camicie Roma" width="30" height="30">
+          <h4>Stiro e finitura</h4>
+  </div>
         <p>Piegatura e stiratura a regola d'arte, per capi pronti da indossare o da riporre nell'armadio.</p>
         <a href="https://wa.me/393451177166" class="service-cta" target="_blank" rel="noopener">Contattaci</a>
       </div>
       <div class="service-card">
-        <img src="icone/sposa-cerimonia-navy.svg" alt="Lavaggio abito da sposa e cerimonia Roma" width="30" height="30">
-        <h4>Abiti da sposa e cerimonia</h4>
+  <div class="service-card-head">
+          <img src="icone/sposa-cerimonia-navy.svg" alt="Lavaggio abito da sposa e cerimonia Roma" width="30" height="30">
+          <h4>Abiti da sposa e cerimonia</h4>
+  </div>
         <p>Pulizia e conservazione dedicata per i capi più importanti, prima e dopo il grande giorno.</p>
         <a href="https://wa.me/393451177166" class="service-cta" target="_blank" rel="noopener">Contattaci</a>
       </div>
       <div class="service-card">
-        <img src="icone/pelle-pellicce-navy.svg" alt="Pulizia pelle e pellicce Roma" width="30" height="30">
-        <h4>Pelle, pelliccia e capi pregiati</h4>
+  <div class="service-card-head">
+          <img src="icone/pelle-pellicce-navy.svg" alt="Pulizia pelle e pellicce Roma" width="30" height="30">
+          <h4>Pelle, pelliccia e capi pregiati</h4>
+  </div>
         <p>Trattamenti specifici per materiali delicati, che richiedono competenza ed esperienza artigianale.</p>
         <a href="https://wa.me/393451177166" class="service-cta" target="_blank" rel="noopener">Contattaci</a>
       </div>
       <div class="service-card">
-        <img src="icone/piumoni-tessili-navy.svg" alt="Lavaggio piumoni, tappeti e tessili per la casa Roma" width="30" height="30">
-        <h4>Tappeti, piumoni e tessili per la casa</h4>
+  <div class="service-card-head">
+          <img src="icone/piumoni-tessili-navy.svg" alt="Lavaggio piumoni, tappeti e tessili per la casa Roma" width="30" height="30">
+          <h4>Tappeti, piumoni e tessili per la casa</h4>
+  </div>
         <p>Lavaggio in profondità per capi voluminosi, con ritiro e consegna a domicilio su richiesta.</p>
         <a href="https://wa.me/393451177166" class="service-cta" target="_blank" rel="noopener">Contattaci</a>
       </div>
@@ -1591,18 +1737,24 @@
 
     <div class="biz-grid reveal">
       <div class="biz-card">
-        <img src="icone/hotel-chiaro.svg" alt="Servizio lavanderia per hotel e B&amp;B Roma" width="30" height="30">
-        <h3>B&amp;B e strutture ricettive</h3>
+  <div class="biz-card-head">
+          <img src="icone/hotel-chiaro.svg" alt="Servizio lavanderia per hotel e B&amp;B Roma" width="30" height="30">
+          <h3>B&amp;B e strutture ricettive</h3>
+  </div>
         <p>Lavaggio, stiro e manutenzione di lenzuola, federe, asciugamani e tovagliato. Offriamo anche servizio di lavanderia per i vostri ospiti. Consegna puntuale garantita ogni giorno.</p>
       </div>
       <div class="biz-card">
-        <img src="icone/divise-lavoro-chiaro.svg" alt="Lavaggio divise da lavoro Roma" width="30" height="30">
-        <h3>Divise da lavoro</h3>
+  <div class="biz-card-head">
+          <img src="icone/divise-lavoro-chiaro.svg" alt="Lavaggio divise da lavoro Roma" width="30" height="30">
+          <h3>Divise da lavoro</h3>
+  </div>
         <p>Trattamento di divise per ristorazione, hotellerie, sanità e altri settori, con gestione organizzata dei capi. Garantiamo consegna puntuale tutti i giorni.</p>
       </div>
       <div class="biz-card">
-        <img src="icone/lavatrice-chiaro.svg" alt="Lavanderia industriale per attività Roma" width="30" height="30">
-        <h3>Sei una lavanderia o tintoria tradizionale?</h3>
+  <div class="biz-card-head">
+          <img src="icone/lavatrice-chiaro.svg" alt="Lavanderia industriale per attività Roma" width="30" height="30">
+          <h3>Sei una lavanderia o tintoria tradizionale?</h3>
+  </div>
         <p>Aggiungi il lavaggio a secco senza investire in attrezzature. Ce ne occupiamo noi, garantendo consegna puntuale tutti i giorni.</p>
       </div>
     </div>
@@ -1905,6 +2057,33 @@
   Scrivi
 </a>
 
+<div class="discount-popup" id="discountPopup" role="dialog" aria-label="Offerta di benvenuto">
+  <button type="button" class="discount-popup-close" id="discountPopupClose" aria-label="Chiudi">
+    <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <span class="eyebrow">
+    <svg class="spark" viewBox="0 0 24 24"><use href="#ic-sparkle"/></svg>
+    Offerta di benvenuto
+  </span>
+  <p class="discount-popup-title">10% di sconto sul tuo primo ritiro in negozio</p>
+  <p class="discount-popup-note">Lasciaci la tua email: ti mandiamo subito il codice</p>
+  <form class="discount-popup-form" id="discountForm">
+    <input type="email" id="discountEmail" placeholder="La tua email" required>
+    <div class="form-check discount-popup-check">
+      <input id="discountPrivacy" name="privacy" type="checkbox" required>
+      <label for="discountPrivacy">Ho letto e accetto la <a href="privacy.html" target="_blank" style="color:var(--gold); text-decoration:underline;">privacy policy</a></label>
+    </div>
+    <button type="submit" class="btn btn-gold" id="discountSubmit">Ricevi il codice</button>
+  </form>
+  <p class="discount-popup-status" id="discountStatus"></p>
+  <p class="discount-popup-note discount-popup-fineprint">Un utilizzo per cliente</p>
+</div>
+
+<button type="button" class="discount-mini" id="discountMini" aria-label="Mostra l'offerta 10% di sconto">
+  <svg viewBox="0 0 24 24"><use href="#ic-sparkle"/></svg>
+  10% di sconto
+</button>
+
 <script>
   const toggle = document.getElementById('menuToggle');
   const drawer = document.getElementById('mobileDrawer');
@@ -1951,6 +2130,74 @@
         d.querySelector('.cta-dropdown-toggle').setAttribute('aria-expanded', 'false');
       });
     }
+  });
+
+  const discountPopup = document.getElementById('discountPopup');
+  const discountMini = document.getElementById('discountMini');
+  if (discountPopup && discountMini) {
+    let discountDone = sessionStorage.getItem('discountPopupState') === 'done';
+
+    function openDiscountPopup(){
+      discountMini.classList.remove('show');
+      discountPopup.classList.add('show');
+      sessionStorage.setItem('discountPopupState', 'open');
+    }
+    function minimizeDiscountPopup(){
+      discountPopup.classList.remove('show');
+      if (!discountDone) {
+        discountMini.classList.add('show');
+        sessionStorage.setItem('discountPopupState', 'minimized');
+      }
+    }
+
+    const savedState = sessionStorage.getItem('discountPopupState');
+    if (savedState === 'minimized') {
+      discountMini.classList.add('show');
+    } else if (savedState !== 'done') {
+      setTimeout(() => discountPopup.classList.add('show'), 5000);
+    }
+
+    document.getElementById('discountPopupClose').addEventListener('click', minimizeDiscountPopup);
+    discountMini.addEventListener('click', openDiscountPopup);
+
+    const discountForm = document.getElementById('discountForm');
+    const discountStatus = document.getElementById('discountStatus');
+    discountForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('discountEmail').value.trim();
+      const submitBtn = document.getElementById('discountSubmit');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Invio in corso...';
+      discountStatus.className = 'discount-popup-status';
+
+      fetch('/api/send-discount', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      })
+        .then(r => r.json())
+        .then(data => {
+          if (!data.success) throw new Error(data.error || 'Invio non riuscito.');
+          discountForm.style.display = 'none';
+          discountStatus.textContent = 'Fatto! Controlla la tua email: ti abbiamo mandato il codice.';
+          discountStatus.className = 'discount-popup-status show success';
+          discountDone = true;
+          sessionStorage.setItem('discountPopupState', 'done');
+        })
+        .catch(() => {
+          discountStatus.textContent = 'Si è verificato un errore. Riprova oppure scrivici su WhatsApp.';
+          discountStatus.className = 'discount-popup-status show error';
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Ricevi il codice';
+        });
+    });
+  }
+
+  document.querySelectorAll('.service-card, .biz-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+      if (window.innerWidth > 980 || e.target.closest('a')) return;
+      card.classList.toggle('open');
+    });
   });
 
   function animateCounters(container){
