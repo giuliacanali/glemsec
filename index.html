@@ -2073,6 +2073,10 @@
       <input id="discountPrivacy" name="privacy" type="checkbox" required>
       <label for="discountPrivacy">Ho letto e accetto la <a href="privacy.html" target="_blank" style="color:var(--gold); text-decoration:underline;">privacy policy</a></label>
     </div>
+    <div class="form-check discount-popup-check">
+      <input id="discountMarketing" name="marketing" type="checkbox">
+      <label for="discountMarketing">Voglio ricevere offerte e promozioni via email (facoltativo)</label>
+    </div>
     <button type="submit" class="btn btn-gold" id="discountSubmit">Ricevi il codice</button>
   </form>
   <p class="discount-popup-status" id="discountStatus"></p>
@@ -2165,6 +2169,7 @@
     discountForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const email = document.getElementById('discountEmail').value.trim();
+      const marketing = document.getElementById('discountMarketing').checked;
       const submitBtn = document.getElementById('discountSubmit');
       submitBtn.disabled = true;
       submitBtn.textContent = 'Invio in corso...';
@@ -2173,7 +2178,7 @@
       fetch('/api/send-discount', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email })
+        body: JSON.stringify({ email, marketing })
       })
         .then(r => r.json())
         .then(data => {
