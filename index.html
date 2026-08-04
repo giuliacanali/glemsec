@@ -2180,17 +2180,23 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, marketing })
       })
-        .then(r => r.json())
-        .then(data => {
-          if (!data.success) throw new Error(data.error || 'Invio non riuscito.');
+        .then(async (r) => {
+          const data = await r.json();
+          if (!r.ok || !data.success) {
+            const err = new Error(data.error || 'Invio non riuscito.');
+            err.status = r.status;
+            throw err;
+          }
           discountForm.style.display = 'none';
           discountStatus.textContent = 'Fatto! Controlla la tua email: ti abbiamo mandato il codice.';
           discountStatus.className = 'discount-popup-status show success';
           discountDone = true;
           sessionStorage.setItem('discountPopupState', 'done');
         })
-        .catch(() => {
-          discountStatus.textContent = 'Si è verificato un errore. Riprova oppure scrivici su WhatsApp.';
+        .catch((err) => {
+          discountStatus.textContent = err.status === 409
+            ? err.message
+            : 'Si è verificato un errore. Scrivici su WhatsApp per ricevere il tuo sconto.';
           discountStatus.className = 'discount-popup-status show error';
           submitBtn.disabled = false;
           submitBtn.textContent = 'Ricevi il codice';

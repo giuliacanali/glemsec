@@ -41,7 +41,7 @@ module.exports = async function handler(req, res) {
       method: 'POST',
       headers: brevoHeaders,
       body: JSON.stringify({
-        sender: { name: 'Glem Sec', email: 'tintorialavanderiaglemsec@gmail.com' },
+        sender: { name: 'Tintoria Lavanderia Glem Sec', email: 'tintorialavanderiaglemsec@gmail.com' },
         to: [{ email }],
         subject: 'Il tuo sconto del 10% da Glem Sec',
         htmlContent: `
