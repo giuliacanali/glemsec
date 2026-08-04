@@ -49,7 +49,7 @@ module.exports = async function handler(req, res) {
             <div style="max-width:480px; margin:0 auto; background:#ffffff; border-radius:16px; overflow:hidden; border:1px solid #e8e6e1;">
               <div style="background:#0d2639; padding:28px 32px; text-align:center;">
                 <div style="display:inline-block; background:#f4f2ed; padding:8px 18px; border-radius:999px;">
-                  <img src="https://glemsec.vercel.app/assets/img/logo-glemsec.png" alt="Glem Sec" width="140" style="height:auto; max-width:140px; display:block;">
+                  <img src="https://tintorialavanderiaglemsec.com/assets/img/logo-glemsec.png" alt="Glem Sec" width="140" style="height:auto; max-width:140px; display:block;">
                 </div>
               </div>
               <div style="padding:32px;">
