@@ -75,45 +75,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   footer a{ color:var(--gold); }
 
-  .cookie-banner{
-    position:fixed;
-    left:0; right:0; bottom:0;
-    z-index:2000;
-    background:var(--navy);
-    border-top:1px solid rgba(226,178,83,.3);
-    padding:16px 20px;
-    display:none;
-  }
-  .cookie-banner.show{ display:block; }
-  .cookie-banner-inner{
-    max-width:1100px;
-    margin:0 auto;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
-    flex-wrap:wrap;
-  }
-  .cookie-banner p{ margin:0; font-size:13px; color:#d4dde8; flex:1; min-width:220px; line-height:1.5; }
-  .cookie-banner a{ color:var(--gold); text-decoration:underline; }
-  .cookie-banner-actions{ display:flex; gap:10px; flex-shrink:0; }
-  .cookie-banner button{
-    font-family:inherit;
-    cursor:pointer;
-    border-radius:999px;
-    padding:10px 20px;
-    font-size:12.5px;
-    font-weight:700;
-    border:1.5px solid transparent;
-    white-space:nowrap;
-  }
-  .cookie-banner-accept{ background:var(--gold); color:var(--navy); }
-  .cookie-banner-reject{ background:transparent; color:var(--cream); border-color:rgba(226,178,83,.4); }
-  @media (max-width:620px){
-    .cookie-banner-inner{ flex-direction:column; align-items:stretch; }
-    .cookie-banner-actions{ justify-content:stretch; }
-    .cookie-banner button{ flex:1; }
-  }
 </style>
 </head>
 <body>
@@ -200,33 +161,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </footer>
 
-<div class="cookie-banner" id="cookieBanner">
-  <div class="cookie-banner-inner">
-    <p>Usiamo cookie tecnici necessari al sito. Con il tuo consenso, vorremmo usare anche cookie di analisi per capire cosa funziona e migliorare l'esperienza — non vendiamo né condividiamo i tuoi dati con terzi per pubblicità. <a href="cookie.html" target="_blank">Scopri di più</a></p>
-    <div class="cookie-banner-actions">
-      <button type="button" class="cookie-banner-reject" id="cookieReject">Rifiuta</button>
-      <button type="button" class="cookie-banner-accept" id="cookieAccept">Accetta</button>
-    </div>
-  </div>
-</div>
 <script>
   (function(){
-    var consent = localStorage.getItem('cookieConsent');
-    var banner = document.getElementById('cookieBanner');
-    if (consent === 'granted') {
+    if (localStorage.getItem('cookieConsent') === 'granted') {
       gtag('consent', 'update', { analytics_storage: 'granted' });
-    } else if (consent !== 'denied') {
-      banner.classList.add('show');
     }
-    document.getElementById('cookieAccept').addEventListener('click', function(){
-      localStorage.setItem('cookieConsent', 'granted');
-      gtag('consent', 'update', { analytics_storage: 'granted' });
-      banner.classList.remove('show');
-    });
-    document.getElementById('cookieReject').addEventListener('click', function(){
-      localStorage.setItem('cookieConsent', 'denied');
-      banner.classList.remove('show');
-    });
   })();
 </script>
 
