@@ -1755,9 +1755,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <svg viewBox="0 0 24 24"><use href="#ic-star"/></svg>
               <svg viewBox="0 0 24 24"><use href="#ic-star"/></svg>
             </span>
-            <span id="googleRatingValue">— su Google</span>
+            <span id="googleRatingValue">4.7 su Google (20)</span>
           </span>
-          <span class="hero-stat-label"><a href="#" id="googleRatingLink" class="hero-stat-link" target="_blank" rel="noopener">Leggi le recensioni →</a></span>
+          <span class="hero-stat-label"><a href="https://maps.google.com/?cid=17718661185293772848" id="googleRatingLink" class="hero-stat-link" target="_blank" rel="noopener">Leggi le recensioni →</a></span>
         </span>
       </div>
     </div>
@@ -2342,21 +2342,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       requestAnimationFrame(step);
     });
   }
-
-  fetch('/api/google-rating')
-    .then(r => r.json())
-    .then(data => {
-      if (data.error) return;
-      const valueEl = document.getElementById('googleRatingValue');
-      const linkEl = document.getElementById('googleRatingLink');
-      if (valueEl && data.rating) {
-        valueEl.textContent = `${data.rating} su Google (${data.userRatingsTotal || 0})`;
-      }
-      if (linkEl && data.url) {
-        linkEl.href = data.url;
-      }
-    })
-    .catch(() => { /* badge resta sul valore di default se l'endpoint non è disponibile */ });
 
   const revealEls = document.querySelectorAll('.reveal');
   const obs = new IntersectionObserver((entries) => {
